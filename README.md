@@ -1,5 +1,7 @@
 # Healthcare Workflow Prototype
 
+**▶ Live demo: [anhlam09.github.io/nbutter](https://anhlam09.github.io/nbutter/)** (runs in your browser; nothing to install)
+
 ## 👋 Hi, here's what I'm doing
 
 I'm exploring how AI could take some of the busywork off healthcare teams, without ever taking the decisions away from people.

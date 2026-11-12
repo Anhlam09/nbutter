@@ -44,7 +44,9 @@ export const routes = [
   },
 ];
 
-const router = createBrowserRouter(routes);
+// When hosted in a sub-folder (e.g. GitHub Pages at /nbutter/), routes live under that base path.
+const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
+const router = createBrowserRouter(routes, { basename });
 
 export default function App() {
   return <RouterProvider router={router} />;

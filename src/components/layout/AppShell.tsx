@@ -46,7 +46,7 @@ export function AppShell() {
           className="fixed inset-x-0 bottom-0 z-10 border-t border-ink-200 bg-ink-100/95 px-4 py-1.5 text-center text-xs text-ink-700 backdrop-blur lg:pl-64 dark:border-ink-800 dark:bg-ink-900/95 dark:text-ink-300"
         >
           Educational prototype · Fictional data · Simulated AI · Not a medical device, not for clinical use ·{' '}
-          <a href="/third-party-notices.txt" target="_blank" rel="noopener" className="underline hover:text-ink-900 dark:hover:text-white">
+          <a href={`${import.meta.env.BASE_URL}third-party-notices.txt`} target="_blank" rel="noopener" className="underline hover:text-ink-900 dark:hover:text-white">
             Licenses
           </a>
         </div>
