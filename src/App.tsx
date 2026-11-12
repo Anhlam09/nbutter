@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, createHashRouter, RouterProvider } from 'react-router-dom';
 import { AppShell } from '@/components/layout';
 import Dashboard from '@/pages/Dashboard';
 import Intake from '@/pages/Intake';
@@ -44,9 +44,11 @@ export const routes = [
   },
 ];
 
-// When hosted in a sub-folder (e.g. GitHub Pages at /nbutter/), routes live under that base path.
-const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
-const router = createBrowserRouter(routes, { basename });
+// Static hosts such as GitHub Pages can't route /triage etc. to the app, so the hosted build uses
+// hash links (…/#/triage): every link loads with a normal 200 status. Local development keeps clean URLs.
+const router = import.meta.env.VITE_HASH_ROUTER === '1'
+  ? createHashRouter(routes)
+  : createBrowserRouter(routes, { basename: import.meta.env.BASE_URL.replace(/\/$/, '') || '/' });
 
 export default function App() {
   return <RouterProvider router={router} />;
