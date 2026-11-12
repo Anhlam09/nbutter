@@ -45,7 +45,7 @@ function InboxItem({ doc, selected, patientName, onSelect }: { doc: ClinicalDocu
         onClick={onSelect}
         className={`w-full rounded-xl border p-3 text-left transition-colors ${
           selected ? 'border-brand-600 bg-brand-50 dark:border-brand-500 dark:bg-brand-950/40' : 'border-ink-200 hover:bg-ink-50 dark:border-ink-800 dark:hover:bg-ink-800/60'
-        } ${highlighted ? 'ring-2 ring-ai-500' : ''}`}
+        } ${highlighted ? 'ring-2 ring-brand-400' : ''}`}
       >
         <span className="flex items-start gap-2">
           <Icon className="mt-0.5 h-4 w-4 shrink-0 text-ink-600 dark:text-ink-400" aria-hidden="true" />

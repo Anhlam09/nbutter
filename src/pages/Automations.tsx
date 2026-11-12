@@ -73,7 +73,7 @@ export default function Automations() {
             const conds = r.conditions.filter((c) => c.field !== 'always');
             return (
               <li key={r.id} data-entity-id={r.id}>
-                <Card className={clsx('p-4', highlight === r.id && 'ring-2 ring-ai-500', !r.enabled && 'opacity-80')}>
+                <Card className={clsx('p-4', highlight === r.id && 'ring-2 ring-brand-400', !r.enabled && 'opacity-80')}>
                   <div className="mb-3 flex flex-wrap items-start justify-between gap-3">
                     <div className="min-w-0">
                       <h2 className="font-semibold text-ink-900 dark:text-ink-50">{r.name}</h2>

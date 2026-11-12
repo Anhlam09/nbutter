@@ -56,22 +56,22 @@ export function GuidedDemoPanel() {
   return (
     <section
       aria-labelledby="demo-panel-title"
-      className="fixed inset-x-2 bottom-10 z-40 rounded-2xl border border-ai-300 bg-white shadow-xl sm:inset-x-auto sm:right-4 sm:w-[24rem] dark:border-ai-700 dark:bg-ink-900"
+      className="fixed inset-x-2 bottom-10 z-40 rounded-2xl border border-brand-300 bg-white shadow-xl sm:inset-x-auto sm:right-4 sm:w-[24rem] dark:border-brand-700 dark:bg-ink-900"
     >
-      <header className="flex items-center gap-2 rounded-t-2xl border-b border-ai-200 bg-ai-50 px-4 py-2.5 dark:border-ai-800 dark:bg-ai-950/60">
-        <Route className="h-4 w-4 text-ai-700 dark:text-ai-300" aria-hidden="true" />
-        <h2 id="demo-panel-title" ref={headingRef} tabIndex={-1} className="flex-1 text-sm font-semibold text-ai-900 outline-none dark:text-ai-100">
+      <header className="flex items-center gap-2 rounded-t-2xl border-b border-brand-200 bg-brand-50 px-4 py-2.5 dark:border-brand-800 dark:bg-brand-950/60">
+        <Route className="h-4 w-4 text-brand-700 dark:text-brand-300" aria-hidden="true" />
+        <h2 id="demo-panel-title" ref={headingRef} tabIndex={-1} className="flex-1 text-sm font-semibold text-brand-900 outline-none dark:text-brand-100">
           Guided demo · Jamie Morgan
         </h2>
         {started && (
-          <span className="text-xs font-medium text-ai-800 dark:text-ai-200" aria-live="polite">
+          <span className="text-xs font-medium text-brand-800 dark:text-brand-200" aria-live="polite">
             {Math.min(index, total)}/{total} done
           </span>
         )}
         <button
           type="button"
           onClick={() => setCollapsed((c) => !c)}
-          className="rounded-md p-1 text-ai-800 hover:bg-ai-100 dark:text-ai-200 dark:hover:bg-ai-900"
+          className="rounded-md p-1 text-brand-800 hover:bg-brand-100 dark:text-brand-200 dark:hover:bg-brand-900"
           aria-expanded={!collapsed}
           aria-label={collapsed ? 'Expand demo panel' : 'Collapse demo panel'}
         >
@@ -80,7 +80,7 @@ export function GuidedDemoPanel() {
         <button
           type="button"
           onClick={exitDemo}
-          className="rounded-md p-1 text-ai-800 hover:bg-ai-100 dark:text-ai-200 dark:hover:bg-ai-900"
+          className="rounded-md p-1 text-brand-800 hover:bg-brand-100 dark:text-brand-200 dark:hover:bg-brand-900"
           aria-label="Close demo panel (progress is kept)"
         >
           <X className="h-4 w-4" />
@@ -88,8 +88,8 @@ export function GuidedDemoPanel() {
       </header>
 
       {started && (
-        <div className="h-1.5 bg-ai-100 dark:bg-ai-950" role="progressbar" aria-label="Demo progress" aria-valuemin={0} aria-valuemax={total} aria-valuenow={index}>
-          <div className="h-full bg-ai-600 transition-[width] motion-reduce:transition-none" style={{ width: `${(index / total) * 100}%` }} />
+        <div className="h-1.5 bg-brand-100 dark:bg-brand-950" role="progressbar" aria-label="Demo progress" aria-valuemin={0} aria-valuemax={total} aria-valuenow={index}>
+          <div className="h-full bg-brand-600 transition-[width] motion-reduce:transition-none" style={{ width: `${(index / total) * 100}%` }} />
         </div>
       )}
 
@@ -99,7 +99,7 @@ export function GuidedDemoPanel() {
             {next ? <>Next: <span className="font-medium">{next.title}</span></> : 'Journey complete 🎉'}
           </p>
           {next && (
-            <Button size="sm" variant="ai" onClick={runStep} loading={busy}>
+            <Button size="sm" variant="primary" onClick={runStep} loading={busy}>
               Run step {index + 1}
             </Button>
           )}
@@ -118,7 +118,7 @@ export function GuidedDemoPanel() {
                 Starting resets the clinic to its original demo data. Any changes you made will be cleared.
               </p>
               <div className="flex gap-2">
-                <Button variant="ai" iconLeft={<PlayCircle className="h-4 w-4" aria-hidden="true" />} onClick={begin}>
+                <Button variant="primary" iconLeft={<PlayCircle className="h-4 w-4" aria-hidden="true" />} onClick={begin}>
                   Reset data &amp; begin
                 </Button>
                 <Button variant="ghost" onClick={exitDemo}>Not now</Button>
@@ -146,7 +146,7 @@ export function GuidedDemoPanel() {
                 Acting as: <span className="font-medium">{actorName(next.actingAs)}</span>
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
-                <Button variant="ai" onClick={runStep} loading={busy} iconLeft={<PlayCircle className="h-4 w-4" aria-hidden="true" />}>
+                <Button variant="primary" onClick={runStep} loading={busy} iconLeft={<PlayCircle className="h-4 w-4" aria-hidden="true" />}>
                   Run step {index + 1}
                 </Button>
                 <Button variant="ghost" size="sm" onClick={begin} iconLeft={<RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />}>

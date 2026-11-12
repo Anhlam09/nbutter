@@ -1,30 +1,21 @@
-import { useState, type FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Menu, Moon, RotateCcw, Search, Sun } from 'lucide-react';
+import { useState } from 'react';
+import { Menu, Moon, RotateCcw, Sun } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { roleLabel } from '@/lib/format';
-import { Avatar, Button, Modal } from '@/components/ui';
+import { Button, Modal } from '@/components/ui';
 
 export function Topbar({ onMenu }: { onMenu: () => void }) {
-  const navigate = useNavigate();
   const staff = useStore((s) => s.staff);
   const currentStaffId = useStore((s) => s.currentStaffId);
   const theme = useStore((s) => s.theme);
   const setCurrentStaff = useStore((s) => s.setCurrentStaff);
   const toggleTheme = useStore((s) => s.toggleTheme);
   const resetDemo = useStore((s) => s.resetDemo);
-  const [q, setQ] = useState('');
   const [confirmOpen, setConfirmOpen] = useState(false);
-  const current = staff.find((s) => s.id === currentStaffId);
 
-  const submit = (e: FormEvent) => {
-    e.preventDefault();
-    const term = q.trim();
-    navigate(term ? `/patients?q=${encodeURIComponent(term)}` : '/patients');
-  };
 
   return (
-    <header className="sticky top-0 z-20 flex items-center gap-2 border-b border-ink-200 bg-white/90 px-4 py-2.5 backdrop-blur sm:gap-3 dark:border-ink-800 dark:bg-ink-900/90">
+    <header className="sticky top-0 z-20 flex items-center gap-2 bg-ink-50/85 px-4 py-2.5 backdrop-blur sm:gap-3 dark:bg-ink-950/85">
       <button
         type="button"
         onClick={onMenu}
@@ -35,20 +26,7 @@ export function Topbar({ onMenu }: { onMenu: () => void }) {
         <Menu className="h-5 w-5" aria-hidden="true" />
       </button>
 
-      <form onSubmit={submit} role="search" className="relative hidden min-w-0 max-w-md flex-1 sm:block">
-        <label htmlFor="global-search" className="sr-only">
-          Search patients
-        </label>
-        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-500" aria-hidden="true" />
-        <input
-          id="global-search"
-          type="search"
-          value={q}
-          onChange={(e) => setQ(e.target.value)}
-          placeholder="Search patients by name or NHS no."
-          className="h-10 w-full rounded-xl border border-ink-300 bg-ink-50 pl-9 pr-3 text-sm text-ink-900 placeholder:text-ink-500 dark:border-ink-700 dark:bg-ink-800 dark:text-ink-100 dark:placeholder:text-ink-400"
-        />
-      </form>
+      <div className="flex-1" />
 
       <div className="ml-auto flex items-center gap-2">
         <div className="flex items-center">
@@ -60,7 +38,7 @@ export function Topbar({ onMenu }: { onMenu: () => void }) {
             value={currentStaffId}
             onChange={(e) => setCurrentStaff(e.target.value)}
             title="Switch role to try role-based approvals"
-            className="h-9 max-w-[10rem] rounded-xl border border-ink-300 bg-white px-2 text-xs text-ink-900 sm:max-w-[15rem] sm:text-sm dark:border-ink-600 dark:bg-ink-900 dark:text-ink-100"
+            className="h-9 max-w-[11rem] rounded-xl border-0 bg-ink-100 px-3 text-xs font-medium text-ink-800 sm:max-w-[15rem] sm:text-sm dark:bg-ink-900 dark:text-ink-100"
           >
             {staff.map((s) => (
               <option key={s.id} value={s.id}>
@@ -82,17 +60,15 @@ export function Topbar({ onMenu }: { onMenu: () => void }) {
         </Button>
 
         <Button
-          variant="secondary"
+          variant="ghost"
           size="sm"
           onClick={() => setConfirmOpen(true)}
-          iconLeft={<RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />}
-          title="Reset all demo data"
+          aria-label="Reset demo data"
+          title="Reset demo data"
+          className="w-9 px-0!"
         >
-          <span className="hidden sm:inline">Reset demo</span>
-          <span className="sr-only sm:hidden">Reset demo</span>
+          <RotateCcw className="h-4 w-4" aria-hidden="true" />
         </Button>
-
-        {current && <Avatar initials={current.initials} label={`${current.name}, ${roleLabel(current.role)}`} />}
       </div>
 
       <Modal

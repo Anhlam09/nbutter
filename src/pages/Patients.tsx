@@ -25,7 +25,7 @@ function PatientRow({ row, gp }: { row: Row; gp: string }) {
       data-entity-id={p.id}
       highlighted={highlighted}
       onClick={() => navigate(`/patients/${p.id}`)}
-      className={highlighted ? 'ring-2 ring-inset ring-ai-500' : undefined}
+      className={highlighted ? 'ring-2 ring-inset ring-brand-400' : undefined}
     >
       <TD>
         <Link

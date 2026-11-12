@@ -150,7 +150,7 @@ export default function TriageDetail() {
         }
       />
 
-      <div className={clsx('grid grid-cols-1 gap-6 lg:grid-cols-2', isHighlighted && 'rounded-2xl ring-2 ring-ai-500 ring-offset-8 ring-offset-transparent')}>
+      <div className={clsx('grid grid-cols-1 gap-6 lg:grid-cols-2', isHighlighted && 'rounded-2xl ring-2 ring-brand-400 ring-offset-8 ring-offset-transparent')}>
         <div className="space-y-6">
           <Card>
             <CardHeader title="Request details" />

@@ -76,7 +76,7 @@ export function Modal({ open, onClose, title, description, children, footer, siz
         aria-describedby={description ? descId : undefined}
         tabIndex={-1}
         className={clsx(
-          'anim-slide-up max-h-[90vh] w-full overflow-y-auto rounded-2xl border border-ink-200 bg-white shadow-xl dark:border-ink-700 dark:bg-ink-900',
+          'anim-slide-up max-h-[90vh] w-full overflow-y-auto rounded-2xl bg-white shadow-xl ring-1 ring-ink-900/[0.03] dark:bg-ink-900 dark:ring-white/[0.06]',
           sizes[size],
         )}
       >

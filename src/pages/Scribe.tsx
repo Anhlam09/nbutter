@@ -19,7 +19,7 @@ function ListButton({ id, selected, onClick, children }: { id: string; selected:
         onClick={onClick}
         className={`w-full rounded-xl border p-3 text-left text-sm transition-colors ${
           selected ? 'border-brand-600 bg-brand-50 dark:border-brand-500 dark:bg-brand-950/40' : 'border-ink-200 hover:bg-ink-50 dark:border-ink-800 dark:hover:bg-ink-800/60'
-        } ${highlighted ? 'ring-2 ring-ai-500' : ''}`}
+        } ${highlighted ? 'ring-2 ring-brand-400' : ''}`}
       >
         {children}
       </button>
@@ -54,7 +54,7 @@ export default function Scribe() {
   return (
     <div>
       <PageHeader title="Scribe" description="Turn a consultation transcript into a draft SOAP note, then review, edit and approve it." />
-      <details className="mb-4 rounded-2xl border border-ink-200 bg-white p-4 text-sm dark:border-ink-800 dark:bg-ink-900" open>
+      <details className="mb-4 rounded-2xl bg-white shadow-card p-4 text-sm ring-1 ring-ink-900/[0.03] dark:bg-ink-900 dark:ring-white/[0.06]" open>
         <summary className="cursor-pointer font-semibold text-ink-900 dark:text-ink-50">How this works</summary>
         <ol className="mt-2 list-decimal space-y-1 pl-5 text-ink-700 dark:text-ink-300">
           <li>Simulated AI drafts a note by matching keywords in the transcript. It is not a real AI.</li>

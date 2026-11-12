@@ -65,14 +65,20 @@ const statusMap: Record<RequestStatus, { tone: BadgeTone; label: string; icon: L
   closed: { tone: 'neutral', label: 'Closed', icon: Archive },
 };
 
+const statusText: Partial<Record<RequestStatus, string>> = {
+  new: 'text-brand-700 dark:text-brand-300',
+  completed: 'text-green-700 dark:text-green-400',
+};
+
+/** Status is plain text with an icon (no pill), so each row has only one coloured badge: urgency. */
 export function RequestStatusBadge({ status }: { status: RequestStatus }) {
   const s = statusMap[status];
   const Icon = s.icon;
   return (
-    <Badge tone={s.tone} className="gap-1">
-      <Icon className="h-3 w-3 shrink-0" aria-hidden="true" />
+    <span className={clsx('inline-flex items-center gap-1.5 whitespace-nowrap text-xs font-medium', statusText[status] ?? 'text-ink-600 dark:text-ink-400')}>
+      <Icon className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
       {s.label}
-    </Badge>
+    </span>
   );
 }
 

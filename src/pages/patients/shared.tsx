@@ -9,8 +9,8 @@ export function EntityCard({ id, className, children }: { id: string; className?
     <div
       data-entity-id={id}
       className={clsx(
-        'rounded-2xl border border-ink-200 bg-white p-4 dark:border-ink-800 dark:bg-ink-900',
-        highlighted && 'ring-2 ring-ai-500',
+        'rounded-2xl bg-white shadow-card p-4 ring-1 ring-ink-900/[0.03] dark:bg-ink-900 dark:ring-white/[0.06]',
+        highlighted && 'ring-2 ring-brand-400',
         className,
       )}
     >

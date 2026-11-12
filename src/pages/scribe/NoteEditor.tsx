@@ -28,7 +28,7 @@ export function NoteEditor({ note, onGone }: { note: ConsultationNote; onGone: (
 
   const dirty = SECTIONS.some((s) => soap[s.key] !== note.soap[s.key]);
   const canApprove = can(staff, 'approveNote');
-  const ring = highlighted ? 'ring-2 ring-ai-500' : '';
+  const ring = highlighted ? 'ring-2 ring-brand-400' : '';
 
   const save = (): boolean => {
     const r = updateNote(note.id, soap);

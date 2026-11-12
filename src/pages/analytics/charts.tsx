@@ -5,15 +5,15 @@ import {
 import { Card, CardBody, CardHeader } from '@/components/ui';
 
 /**
- * Sage & Paper chart palette, validated with the dataviz palette validator (light on #ffffff, dark on #1f1e1a):
+ * Sage & Paper chart palette, validated with the dataviz palette validator (light on #ffffff, dark on #1f1b2a):
  * categorical slots pass lightness, chroma, contrast and colour-blind separation (slot 3↔4 is in the 6–8 band, so
  * charts using all four slots label every bar). Ramps are single-hue and monotone. Text always uses neutral ink.
  */
 export function usePalette(dark: boolean) {
   return dark
-    ? { blue: '#4f8fdc', orange: '#d96a35', aqua: '#2fa874', yellow: '#c08a12', surface: '#1f1e1a', grid: '#47443a', ink: '#cdc9b9', inkStrong: '#f7f6f1',
+    ? { blue: '#4f8fdc', orange: '#d96a35', aqua: '#2fa874', yellow: '#c08a12', surface: '#1f1b2a', grid: '#474059', ink: '#d0cae0', inkStrong: '#faf9fd',
         ramp: ['#a3c3f0', '#6b9be0', '#3f78c4', '#2b5a94'] }
-    : { blue: '#2f6db5', orange: '#c85a2a', aqua: '#1f8a5f', yellow: '#a87a00', surface: '#ffffff', grid: '#e2dfd3', ink: '#5c584a', inkStrong: '#1f1e1a',
+    : { blue: '#2f6db5', orange: '#c85a2a', aqua: '#1f8a5f', yellow: '#a87a00', surface: '#ffffff', grid: '#e6e2f0', ink: '#5d5672', inkStrong: '#1f1b2a',
         ramp: ['#1e4f86', '#2f6db5', '#5b8fd0', '#86acde'] };
 }
 export type Palette = ReturnType<typeof usePalette>;

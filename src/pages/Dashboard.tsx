@@ -1,13 +1,13 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useShallow } from 'zustand/react/shallow';
-import { CalendarClock, ClipboardCheck, FileText, Inbox, Play, Search, Stethoscope } from 'lucide-react';
+import { CalendarClock, Inbox, Play, Search, SlidersHorizontal } from 'lucide-react';
 import { useStore, useCurrentStaff } from '@/store/useStore';
 import { computeAnalytics, sortRequests } from '@/store/selectors';
 import {
   Button, Card, CardBody, CardHeader, EmptyState, Input, PageHeader, Select, StatCard, Timeline,
 } from '@/components/ui';
-import { roleLabel, fmtDateTime } from '@/lib/format';
+import { fmtDateTime } from '@/lib/format';
 import type { RequestStatus, Urgency } from '@/types';
 import { RequestTable } from './triage/RequestTable';
 import { activityItems, useScrollToHighlight } from './triage/shared';
@@ -24,6 +24,7 @@ export default function Dashboard() {
   const startDemo = useStore((s) => s.startDemo);
 
   const [q, setQ] = useState('');
+  const [moreFilters, setMoreFilters] = useState(false);
   const [status, setStatus] = useState<'all' | RequestStatus>('all');
   const [urgency, setUrgency] = useState<'all' | Urgency>('all');
   const [assignee, setAssignee] = useState('all');
@@ -69,7 +70,7 @@ export default function Dashboard() {
     <div>
       <PageHeader
         title={`${greeting}, ${me.name}`}
-        description={`${today} · ${roleLabel(me.role)} view. Here is what needs attention in the practice today.`}
+        description={today}
         actions={
           <Button iconLeft={<Play className="h-4 w-4" aria-hidden="true" />} onClick={() => startDemo()}>
             Start Guided Demo
@@ -77,17 +78,15 @@ export default function Dashboard() {
         }
       />
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <StatCard label="Awaiting triage" value={totals.awaitingTriage} hint="new or in review" icon={<Inbox className="h-5 w-5" />} />
-        <StatCard label="Open requests" value={totals.openRequests} hint="not yet completed" icon={<Stethoscope className="h-5 w-5" />} />
-        <StatCard label="Documents to review" value={totals.documentsToReview} hint="inbox and in review" icon={<FileText className="h-5 w-5" />} />
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
+        <StatCard label="Awaiting triage" value={totals.awaitingTriage} />
+        <StatCard label="Open requests" value={totals.openRequests} />
+        <StatCard label="Documents to review" value={totals.documentsToReview} />
         <StatCard
           label="Open tasks"
           value={totals.openTasks}
           delta={totals.overdueTasks ? `${totals.overdueTasks} overdue` : undefined}
           deltaTone="bad"
-          hint={totals.overdueTasks ? undefined : 'none overdue'}
-          icon={<ClipboardCheck className="h-5 w-5" />}
         />
       </div>
 
@@ -95,10 +94,10 @@ export default function Dashboard() {
         <Card className="2xl:col-span-2" aria-labelledby="req-heading">
           <CardHeader
             title={<span id="req-heading">Patient requests</span>}
-            description="Most urgent and longest-waiting first. Select a row to open it."
+            description={<span aria-live="polite">Most urgent first · showing {rows.length} of {requests.length}</span>}
           />
-          <div className="grid grid-cols-1 gap-3 border-b border-ink-200 px-5 py-3 sm:grid-cols-2 lg:grid-cols-4 dark:border-ink-800">
-            <div className="relative sm:col-span-2 lg:col-span-1">
+          <div className="flex flex-wrap items-center gap-3 px-5 py-3">
+            <div className="relative min-w-[12rem] flex-1">
               <Search className="pointer-events-none absolute left-3 top-3 h-4 w-4 text-ink-500" aria-hidden="true" />
               <Input
                 type="search"
@@ -109,6 +108,7 @@ export default function Dashboard() {
                 onChange={(e) => setQ(e.target.value)}
               />
             </div>
+            <div className="w-full sm:w-44">
             <Select aria-label="Filter by status" value={status} onChange={(e) => setStatus(e.target.value as typeof status)}>
               <option value="all">All statuses</option>
               <option value="new">New</option>
@@ -118,6 +118,21 @@ export default function Dashboard() {
               <option value="completed">Completed</option>
               <option value="closed">Closed</option>
             </Select>
+            </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              aria-expanded={moreFilters}
+              aria-controls="more-filters"
+              onClick={() => setMoreFilters((v) => !v)}
+              iconLeft={<SlidersHorizontal className="h-4 w-4" aria-hidden="true" />}
+            >
+              {moreFilters ? 'Fewer filters' : 'More filters'}
+              {!moreFilters && (urgency !== 'all' || assignee !== 'all') && <span className="sr-only"> (active)</span>}
+            </Button>
+          </div>
+          {moreFilters && (
+          <div id="more-filters" className="grid grid-cols-1 gap-3 px-5 pb-3 sm:grid-cols-2 lg:max-w-xl">
             <Select aria-label="Filter by urgency" value={urgency} onChange={(e) => setUrgency(e.target.value as typeof urgency)}>
               <option value="all">All urgencies</option>
               <option value="emergency">Emergency</option>
@@ -133,6 +148,7 @@ export default function Dashboard() {
               ))}
             </Select>
           </div>
+          )}
           {rows.length === 0 ? (
             <EmptyState
               icon={<Inbox className="h-6 w-6" />}
@@ -149,9 +165,6 @@ export default function Dashboard() {
           ) : (
             <RequestTable rows={rows} patients={patients} staff={staff} highlight={highlight} />
           )}
-          <p className="border-t border-ink-200 px-5 py-2.5 text-xs text-ink-600 dark:border-ink-800 dark:text-ink-400" aria-live="polite">
-            Showing {rows.length} of {requests.length} requests.
-          </p>
         </Card>
 
         <div className="grid content-start gap-6 md:grid-cols-2 2xl:grid-cols-1">

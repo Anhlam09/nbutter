@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import type { Patient, PatientRequest, Staff } from '@/types';
-import { Avatar, RequestStatusBadge, UrgencyBadge, Table, THead, TBody, TR, TH, TD } from '@/components/ui';
+import { RequestStatusBadge, UrgencyBadge, Table, THead, TBody, TR, TH, TD } from '@/components/ui';
 import { channelLabel, fmtDuration, minutesBetween, relativeTime } from '@/lib/format';
 
 export function RequestTable({
@@ -33,24 +33,19 @@ export function RequestTable({
               highlighted={highlight === r.id}
               onClick={() => navigate(`/triage/${r.id}`)}
               aria-label={`Open request: ${r.subject}`}
-              className={highlight === r.id ? 'ring-2 ring-inset ring-ai-500' : undefined}
+              className={highlight === r.id ? 'ring-2 ring-inset ring-brand-400' : undefined}
             >
               <TD className="whitespace-nowrap">
-                <div className="font-medium text-ink-900 dark:text-ink-50">{p?.name ?? 'Unknown patient'}</div>
-                <div className="text-xs text-ink-600 dark:text-ink-400">NHS {p?.nhsNumber ?? '—'}</div>
+                <span className="font-medium text-ink-900 dark:text-ink-50">{p?.name ?? 'Unknown patient'}</span>
               </TD>
               <TD className="max-w-xs">
-                <div className="truncate font-medium">{r.subject}</div>
-                <div className="text-xs text-ink-600 dark:text-ink-400">{channelLabel(r.channel)}</div>
+                <span className="block truncate" title={`${r.subject} · ${channelLabel(r.channel)}`}>{r.subject}</span>
               </TD>
               <TD><UrgencyBadge urgency={r.urgency} /></TD>
               <TD><RequestStatusBadge status={r.status} /></TD>
               <TD>
                 {a ? (
-                  <span className="flex items-center gap-2">
-                    <Avatar initials={a.initials} size="sm" />
-                    <span className="whitespace-nowrap">{a.name}</span>
-                  </span>
+                  <span className="whitespace-nowrap">{a.name}</span>
                 ) : (
                   <span className="text-ink-600 dark:text-ink-400">Unassigned</span>
                 )}

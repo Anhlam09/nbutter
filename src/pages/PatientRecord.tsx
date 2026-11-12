@@ -358,7 +358,7 @@ function TaskRow({ task, patientId }: { task: Task; patientId: string }) {
   return (
     <div
       data-entity-id={task.id}
-      className={`flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-ink-200 bg-white p-4 dark:border-ink-800 dark:bg-ink-900 ${highlighted ? 'ring-2 ring-ai-500' : ''}`}
+      className={`flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-white shadow-card p-4 ring-1 ring-ink-900/[0.03] dark:bg-ink-900 dark:ring-white/[0.06] ${highlighted ? 'ring-2 ring-brand-400' : ''}`}
     >
       <div className="min-w-0">
         <p className={`text-sm font-medium ${done ? 'text-ink-600 line-through dark:text-ink-400' : 'text-ink-900 dark:text-ink-100'}`}>{task.title}</p>

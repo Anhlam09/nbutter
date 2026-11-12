@@ -5,7 +5,7 @@ export function Card({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={clsx(
-        'rounded-2xl border border-ink-200 bg-white dark:border-ink-800 dark:bg-ink-900',
+        'rounded-2xl bg-white shadow-card ring-1 ring-ink-900/[0.03] dark:bg-ink-900 dark:shadow-none dark:ring-white/[0.06]',
         className,
       )}
       {...rest}
@@ -23,7 +23,7 @@ export function CardHeader({ title, description, actions, className }: CardHeade
   return (
     <div
       className={clsx(
-        'flex flex-wrap items-start justify-between gap-3 border-b border-ink-200 px-5 py-4 dark:border-ink-800',
+        'flex flex-wrap items-start justify-between gap-3 border-b border-ink-100 px-5 py-4 dark:border-ink-800',
         className,
       )}
     >

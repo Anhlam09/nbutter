@@ -2,53 +2,54 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* Sage & Paper theme. Typography: Fraunces (headings) + Figtree (text), both self-hosted (SIL OFL). */
-  --font-sans: 'Figtree Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-display: 'Fraunces Variable', ui-serif, Georgia, 'Times New Roman', serif;
+  /* Lavender theme: dark purple + lavender, calm and simple. Typeface: DM Sans (self-hosted, SIL OFL). */
+  --font-sans: 'DM Sans Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'DM Sans Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  /* ink = warm paper neutrals (text, borders, surfaces) */
-  --color-ink-50: #f7f6f1;
-  --color-ink-100: #efede5;
-  --color-ink-200: #e2dfd3;
-  --color-ink-300: #cdc9b9;
-  --color-ink-400: #a29d89;
-  --color-ink-500: #716c5a;
-  --color-ink-600: #5c584a;
-  --color-ink-700: #47443a;
-  --color-ink-800: #2f2d27;
-  --color-ink-900: #1f1e1a;
-  --color-ink-950: #141311;
+  /* ink = soft lavender-grey neutrals (text, surfaces) */
+  --color-ink-50: #faf9fd;
+  --color-ink-100: #f3f1f9;
+  --color-ink-200: #e6e2f0;
+  --color-ink-300: #d0cae0;
+  --color-ink-400: #a59dba;
+  --color-ink-500: #6f6787;
+  --color-ink-600: #5d5672;
+  --color-ink-700: #474059;
+  --color-ink-800: #2f2a3d;
+  --color-ink-900: #1f1b2a;
+  --color-ink-950: #13101b;
 
-  /* brand = pine green (primary actions, links, navigation) */
-  --color-brand-50: #eef5f1;
-  --color-brand-100: #d6e9df;
-  --color-brand-200: #aed3c0;
-  --color-brand-300: #7fb79c;
-  --color-brand-400: #559a7b;
-  --color-brand-500: #3a7e62;
-  --color-brand-600: #2c664f;
-  --color-brand-700: #245241;
-  --color-brand-800: #1d4235;
-  --color-brand-900: #17352b;
-  --color-brand-950: #0c1f19;
+  /* brand = lavender → dark purple (navigation, primary actions, guided demo) */
+  --color-brand-50: #f6f3fe;
+  --color-brand-100: #ece6fd;
+  --color-brand-200: #dcd2fb;
+  --color-brand-300: #c3b4f5;
+  --color-brand-400: #a58eef;
+  --color-brand-500: #8467e0;
+  --color-brand-600: #6a4cc4;
+  --color-brand-700: #4c2f8f;
+  --color-brand-800: #3d2675;
+  --color-brand-900: #2f1e5a;
+  --color-brand-950: #1f1440;
 
-  /* ai = plum, reserved for anything produced by the simulated AI */
-  --color-ai-50: #f8f2f7;
-  --color-ai-100: #f0e3ee;
-  --color-ai-200: #e1c7dd;
-  --color-ai-300: #cb9fc4;
-  --color-ai-400: #b076a6;
-  --color-ai-500: #94588a;
-  --color-ai-600: #7a4571;
-  --color-ai-700: #64385d;
-  --color-ai-800: #522f4d;
-  --color-ai-900: #432840;
-  --color-ai-950: #2a1527;
+  /* ai = mint, reserved for anything produced by the simulated AI */
+  --color-ai-50: #effcf8;
+  --color-ai-100: #c9f6ea;
+  --color-ai-200: #94ecd6;
+  --color-ai-300: #57dbbf;
+  --color-ai-400: #27c2a6;
+  --color-ai-500: #0fa68d;
+  --color-ai-600: #0a8573;
+  --color-ai-700: #0c6a5d;
+  --color-ai-800: #0f554b;
+  --color-ai-900: #11463f;
+  --color-ai-950: #032925;
 
-  /* softer corners */
+  /* soft, outline-free cards */
+  --shadow-card: 0 1px 2px rgb(31 20 64 / 0.05), 0 6px 20px rgb(31 20 64 / 0.05);
   --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-  --radius-2xl: 1.375rem;
+  --radius-xl: 0.875rem;
+  --radius-2xl: 1.25rem;
 }
 
 @layer base {
@@ -66,8 +67,7 @@
   .dark :focus-visible { outline-color: var(--color-brand-300); }
   h1, h2, h3, .font-display {
     font-family: var(--font-display);
-    font-optical-sizing: auto;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
   }
 }
 
